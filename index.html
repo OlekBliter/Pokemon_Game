@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="shortcut icon" href="img/icon.png" type="image/png">
+    <title>Pokemon</title>
+</head>
+<body>
+    <div class="wrap">
+        <div class="main-page">
+            <div class="header-box">
+                <h1 class="heading">Game Pokemon</h1>
+                <p>Can you catch them all?</p>
+                <button class="start">Start</button>
+            </div>
+        </div>
+        <div class="choose-page">
+            <div class="choose-box">
+                <div class="choosePokemonBox">
+                    <div class="img-box" id="charmanderBox">
+                        <img src="img/pokemon/charmander.webp" alt="">
+                    </div>
+                    <h1>Charmander</h1>
+                    <div class="stat">
+                        <p>40hp</p>
+                        <p>20dmg</p>
+                    </div>
+                    <button id="charmanderBtn">Choose</button>
+                </div>
+                <div class="choosePokemonBox">
+                    <div class="img-box" id="bulbazaurBox">
+                        <img src="img/pokemon/bulbazaur.webp" alt="">
+                    </div>
+                    <h1>Bulbazaur</h1>
+                    <div class="stat">
+                        <p>60hp</p>
+                        <p>7dmg</p>
+                    </div>
+                    <button id="bulbazaurBtn">Choose</button>
+                </div>
+                <div class="choosePokemonBox">
+                    <div class="img-box" id="squirtleBox">
+                        <img src="img/pokemon/squirtle.webp" alt="">
+                    </div>
+                    <h1>Squirtle</h1>
+                    <div class="stat">
+                        <p>50hp</p>
+                        <p>10dmg</p>
+                    </div>
+                    <button id="squirtleBtn">Choose</button>
+                </div>                
+                <div class="pikachu-box">
+                    <div class="column">
+                        <input type="text" id="pikachuInput" placeholder="Who is the pokemon?">
+                        <button id="checkPikachuInput">Check</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="game-page">
+            <div class="targetPokemon" id="targetPokemon"></div>
+            <div class="navWindows">
+                <div class="achievementsWindow window">
+                    <button id="return">⇐</button>
+                    <h1>Achievements</h1>
+                    <div class="content">
+                        <div class="achievementBox">
+                            <div class="left-part">
+                                <img id="achimg" src="" alt="">
+                            </div>
+                            <div class="right-part" id="achrp"></div>
+                        </div>
+                        <div class="achievementBox">
+                            <div class="left-part">
+                                <img id="achimg" src="" alt="">
+                            </div>
+                            <div class="right-part" id="achrp"></div>
+                        </div>
+                        <div class="achievementBox">
+                            <div class="left-part">
+                                <img id="achimg" src="" alt="">
+                            </div>
+                            <div class="right-part" id="achrp"></div>
+                        </div>
+                        <div class="achievementBox">
+                            <div class="left-part">
+                                <img id="achimg" src="" alt="">
+                            </div>
+                            <div class="right-part" id="achrp"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="shopWindow window">
+                    <button id="return">⇐</button>
+                    <div class="money"> <span>💰</span> <span>=</span> <span id="numberOfCoins">0</spam></div>
+                    <h1>Shop</h1>
+                    <div class="content">
+                        <div class="shopItem">
+                            <div class="left-part">
+                                <img id="shopImg" src="" alt="">
+                            </div>
+                            <div class="middle-part" id="shopMd"></div>
+                            <div class="right-part">
+                                <p id="shopP"></p>
+                                <button id="shopBuy">Buy</button>
+                            </div>
+                        </div>
+                        <div class="shopItem">
+                            <div class="left-part">
+                                <img id="shopImg" src="" alt="">
+                            </div>
+                            <div class="middle-part" id="shopMd"></div>
+                            <div class="right-part">
+                                <p id="shopP"></p>
+                                <button id="shopBuy">Buy</button>
+                            </div>
+                        </div>
+                        <div class="shopItem">
+                            <div class="left-part">
+                                <img id="shopImg" src="" alt="">
+                            </div>
+                            <div class="middle-part" id="shopMd"></div>
+                            <div class="right-part">
+                                <p id="shopP"></p>
+                                <button id="shopBuy">Buy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pokemon_storageWindow window">
+                    <button id="return">⇐</button>
+                    <h1>Pokemon Storage</h1>
+                    <div class="content">
+                        <div class="pokemon">
+                            <div class="top-part">
+                                <h1 id="pokeName"></h1>
+                                <img id="pokeImg" src="" alt="">
+                            </div>
+                            <div id="pokeRarity" class="bottom-part"></div>
+                        </div>
+                        <div class="pokemon">
+                            <div class="top-part">
+                                <h1 id="pokeName"></h1>
+                                <img id="pokeImg" src="" alt="">
+                            </div>
+                            <div id="pokeRarity" class="bottom-part"></div>
+                        </div>
+                        <div class="pokemon">
+                            <div class="top-part">
+                                <h1 id="pokeName"></h1>
+                                <img id="pokeImg" src="" alt="">
+                            </div>
+                            <div id="pokeRarity" class="bottom-part"></div>
+                        </div>
+                        <div class="pokemon">
+                            <div class="top-part">
+                                <h1 id="pokeName"></h1>
+                                <img id="pokeImg" src="" alt="">
+                            </div>
+                            <div id="pokeRarity" class="bottom-part"></div>
+                        </div>
+                        <div class="pokemon">
+                            <div class="top-part">
+                                <h1 id="pokeName"></h1>
+                                <img id="pokeImg" src="" alt="">
+                            </div>
+                            <div id="pokeRarity" class="bottom-part"></div>
+                        </div>
+                        <div class="pokemon">
+                            <div class="top-part">
+                                <h1 id="pokeName"></h1>
+                                <img id="pokeImg" src="" alt="">
+                            </div>
+                            <div id="pokeRarity" class="bottom-part"></div>
+                        </div>
+                        <div class="pokemon">
+                            <div class="top-part">
+                                <h1 id="pokeName"></h1>
+                                <img id="pokeImg" src="" alt="">
+                            </div>
+                            <div id="pokeRarity" class="bottom-part"></div>
+                        </div>
+                        <div class="pokemon">
+                            <div class="top-part">
+                                <h1 id="pokeName"></h1>
+                                <img id="pokeImg" src="" alt="">
+                            </div>
+                            <div id="pokeRarity" class="bottom-part"></div>
+                        </div>
+                        <div class="pokemon">
+                            <div class="top-part">
+                                <h1 id="pokeName"></h1>
+                                <img id="pokeImg" src="" alt="">
+                            </div>
+                            <div id="pokeRarity" class="bottom-part"></div>
+                        </div>
+                        <div class="pokemon">
+                            <div class="top-part">
+                                <h1 id="pokeName"></h1>
+                                <img id="pokeImg" src="" alt="">
+                            </div>
+                            <div id="pokeRarity" class="bottom-part"></div>
+                        </div>
+                        <div class="pokemon">
+                            <div class="top-part">
+                                <h1 id="pokeName"></h1>
+                                <img id="pokeImg" src="" alt="">
+                            </div>
+                            <div id="pokeRarity" class="bottom-part"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="itemsWindow window">
+                    <button id="return">⇐</button>
+                    <h1>Items</h1>
+                    <div class="content"></div>
+                </div>
+            </div>
+            <div class="nav">
+                <li id="achievementsBtn">               
+                    <img src="img/nav Img/medal.png" alt="">
+                </li>
+                <li id="shopBtn">
+                    <img src="img/nav Img/store.png" alt="">
+                </li>
+                <li id="pokemonSpawnBtn">
+                    <img src="img/nav Img/pokemon-go.png" alt="">
+                </li>
+                <li id="pokemonStorageBtn">
+                    <img src="img/nav Img/pokeball.png" alt="">
+                </li>
+                <li id="itemsStorageBtn">
+                    <img src="img/nav Img/backpack.png" alt="">
+                </li>
+            </div>
+        </div>
+    </div>
+    <script src="script/script.js"></script>
+</body>
+</html>
