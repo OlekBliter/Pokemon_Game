@@ -256,8 +256,19 @@ checkPikachuInput.onclick = function(){
     }
 }
 // game-page
+let settClick = false
 
-let coins = 0 
+document.getElementById('yourStatButton').onclick = function(){
+    if(settClick == false){
+        document.getElementById('yourStatButton').style.transform = 'rotate(360deg)'
+        document.getElementById('yourStatistics').style.opacity = '1'
+        settClick = true
+    }else{
+        document.getElementById('yourStatButton').style.transform = 'rotate(-360deg)'
+        document.getElementById('yourStatistics').style.opacity = '0'
+        settClick = false
+    }
+}
 
 // fill achievements window
 
@@ -336,11 +347,43 @@ returnBtns.forEach(retbtn => {
 });
 
 // gameplay
+let coins = 0 
 
 let topPos = 50
 let leftPos = 50
 
-let randTarget = Math.floor(Math.random()*targetPokemon.length)
+let commonPok = 0
+let rarePok = 0
+let legendaryPok = 0
+let specialPok = 0
+
+let commonAch = false
+let rareAch = false
+let legendaryAch = false
+let specialAch = false
+
+let common = Array.from(targetPokemon.filter(obj => obj.rarity == 'common'))
+let rare = Array.from(targetPokemon.filter(obj => obj.rarity == 'rare'))
+let legendary = Array.from(targetPokemon.filter(obj => obj.rarity == 'legendary'))
+let special = Array.from(targetPokemon.filter(obj => obj.rarity == 'special'))
+
+
+function randTargetArr(){
+    let randArr = Math.floor(Math.random()*10)
+    if(randArr<4){
+        return common
+    }else if(randArr > 3 && randArr < 7){
+        return rare
+    }else if(randArr > 6 && randArr < 9){
+        return legendary
+    }else if(randArr == 9){
+        return special
+    }
+}
+
+let arrRand = randTargetArr()
+
+let randTarget = Math.floor(Math.random()*arrRand.length)
 
 pokemonSpawnBtn.onclick = function(){
     document.querySelector('.navWindows').style.display = 'none'
@@ -350,7 +393,16 @@ pokemonSpawnBtn.onclick = function(){
     leftPos = 50
     topPos = 50
     document.getElementById('targetPokemon').style.display = 'block'
-    document.getElementById('targetPokemon').style.backgroundImage = 'url(' + targetPokemon[randTarget].img + ')'
+    document.getElementById('targetPokemon').style.backgroundImage = 'url(' + arrRand[randTarget].img + ')'
+    if(arrRand[randTarget].rarity == 'common'){
+        document.getElementById('targetPokemon').style.transition = '3s'
+    }else if(arrRand[randTarget].rarity == 'rare'){
+        document.getElementById('targetPokemon').style.transition = '2s'
+    }else if(arrRand[randTarget].rarity == 'legendary'){
+        document.getElementById('targetPokemon').style.transition = '1s'
+    }else if(arrRand[randTarget].rarity == 'special'){
+        document.getElementById('targetPokemon').style.transition = '0.5s'
+    }
 }
 
 document.getElementById('targetPokemon').onmouseenter = function(){
@@ -361,9 +413,99 @@ document.getElementById('targetPokemon').onmouseenter = function(){
 }
 
 document.getElementById('targetPokemon').onclick = function(){
-    document.getElementById('targetPokemon').style.display = 'none'
-    pokemonStorage[randTarget].is = true
-    Array.from(document.querySelectorAll('.pokemon'))[randTarget].style.display = 'flex'
-    
-    randTarget = Math.floor(Math.random()*targetPokemon.length)
+    if(arrRand[randTarget].rarity == 'common'){
+        commonPok++
+        document.querySelectorAll('.pokeStat')[0].textContent = 'You catch '+ commonPok +' common pokemon'
+    }else if(arrRand[randTarget].rarity == 'rare'){
+        rarePok++
+        document.querySelectorAll('.pokeStat')[1].textContent = 'You catch '+ rarePok +' rare pokemon'
+    }else if(arrRand[randTarget].rarity == 'legendary'){
+        legendaryPok++
+        document.querySelectorAll('.pokeStat')[2].textContent = 'You catch '+ legendaryPok +' legendary pokemon'
+    }else if(arrRand[randTarget].rarity == 'special'){
+        specialPok++
+        document.querySelectorAll('.pokeStat')[3].textContent = 'You catch '+ specialPok +' special pokemon'
+    }
+    if(pokemonStorage[pokemonStorage.map(e => e.name).indexOf(arrRand[randTarget].name)].is == false){
+        document.getElementById('targetPokemon').style.display = 'none'
+        pokemonStorage[pokemonStorage.map(e => e.name).indexOf(arrRand[randTarget].name)].is = true
+        Array.from(document.querySelectorAll('.pokemon'))[pokemonStorage.map(e => e.name).indexOf(arrRand[randTarget].name)].style.display = 'flex'
+        arrRand = randTargetArr()
+        randTarget = Math.floor(Math.random()*arrRand.length)
+    }else if(pokemonStorage[pokemonStorage.map(e => e.name).indexOf(arrRand[randTarget].name)].is == true && arrRand[randTarget].rarity == 'common'){
+        document.getElementById('targetPokemon').style.display = 'none'
+        arrRand = randTargetArr()
+        randTarget = Math.floor(Math.random()*arrRand.length)
+        coins++
+        numberOfCoins.textContent = coins
+    }else if(pokemonStorage[pokemonStorage.map(e => e.name).indexOf(arrRand[randTarget].name)].is == true && arrRand[randTarget].rarity == 'rare'){
+        document.getElementById('targetPokemon').style.display = 'none'
+        arrRand = randTargetArr()
+        randTarget = Math.floor(Math.random()*arrRand.length)
+        coins = coins + 5
+        numberOfCoins.textContent = coins
+    }else if(pokemonStorage[pokemonStorage.map(e => e.name).indexOf(arrRand[randTarget].name)].is == true && arrRand[randTarget].rarity == 'legendary'){
+        document.getElementById('targetPokemon').style.display = 'none'
+        arrRand = randTargetArr()
+        randTarget = Math.floor(Math.random()*arrRand.length)
+        coins = coins + 10
+        numberOfCoins.textContent = coins
+    }else if(pokemonStorage[pokemonStorage.map(e => e.name).indexOf(arrRand[randTarget].name)].is == true && arrRand[randTarget].rarity == 'special'){
+        document.getElementById('targetPokemon').style.display = 'none'
+        arrRand = randTargetArr()
+        randTarget = Math.floor(Math.random()*arrRand.length)
+        coins = coins + 25
+        numberOfCoins.textContent = coins
+    }
+    checkAchievements()
 }
+
+// achievements
+
+function checkAchievements(){
+    if(commonPok == 1 && commonAch == false){
+        alert('You catch a first common pokemon')
+        document.querySelectorAll('.achievementBox')[0].style.filter = 'grayscale(0%)'
+        commonAch = true
+    }
+    if(rarePok == 1 && rareAch == false){
+        alert('You catch a first rare pokemon')
+        document.querySelectorAll('.achievementBox')[1].style.filter = 'grayscale(0%)'
+        rareAch = true
+    }
+    if(legendaryPok == 1 && legendaryAch == false){
+        alert('You catch a first legendary pokemon')
+        document.querySelectorAll('.achievementBox')[2].style.filter = 'grayscale(0%)'
+        legendaryAch = true
+    }
+    if(specialPok == 1 && specialAch == false){
+        alert('You catch a first special pokemon')
+        document.querySelectorAll('.achievementBox')[3].style.filter = 'grayscale(0%)'
+        specialAch = true
+    }
+}
+
+// shop
+
+document.querySelectorAll('#shopBuy').forEach(btn => {
+    btn.onclick = function(){
+        if(coins>=Number(btn.parentNode.childNodes[1].textContent.slice(0, -5))){
+            alert('You bought it!')
+            itemsStorage.push(shopItems[shopItems.map(e => e.price).indexOf(Number(btn.parentNode.childNodes[1].textContent.slice(0, -5)))])
+            document.getElementById('itemsContent').innerHTML += '<div class="item"><div class="left-part"><img id="itemImg" src="" alt=""></div><div class="middle-part" id="itemMd"></div><div class="right-part"><button id="itemUse">Use</button></div></div>'
+            coins = coins - Number(btn.parentNode.childNodes[1].textContent.slice(0, -5))
+            numberOfCoins.textContent = coins
+            for(i=0; i<itemsStorage.length; i++){
+                Array.from(document.querySelectorAll('#itemImg'))[i].src = itemsStorage[i].img
+                Array.from(document.querySelectorAll('#itemMd'))[i].textContent = itemsStorage[i].name
+            }
+            document.querySelectorAll('#itemUse').forEach(btn => {
+                btn.onclick = function(){
+                    btn.parentNode.parentNode.style.display = 'none'
+                }
+            });
+        }else{
+            alert("You don't have enough money")
+        }
+    }
+});
